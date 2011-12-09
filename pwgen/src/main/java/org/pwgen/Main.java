@@ -1,27 +1,17 @@
 package org.pwgen;
 
 public class Main {
-    private final PasswordGenerator generator;
-    
-    public Main(PasswordGenerator generator) {
-	this.generator = generator;
-    }
-    
-    public void run() {
-	for (String password : generator.generate()) {
-	    System.out.println(password);
-	}
-    }
-    
     // TODO: Use Apache Commons Cli to get password and character options.
     public static void main(String[] args) {
+	PasswordGenerator generator = new PasswordGenerator();
 	
-	PasswordChars options = new PasswordChars(false, false, false, true);
+	PasswordChars options = new PasswordChars(true, true, true, false);
+	final int number = 10;
+	final int length = 10;
 	
-	PasswordGenerator generator = new PasswordGenerator(options, 30, 10);
-	
-	Main program = new Main(generator);
-	program.run();
+	for (String password : generator.generateMultiple(options, number, length)) {
+	    System.out.println(password);
+	}
     }
 
 }

@@ -6,15 +6,13 @@ import java.util.Random;
 
 public class PasswordGenerator {
 
-    private final PasswordChars characters;
-    private final int length;
-    private final int number;
-
     private static final String lookupTable = 
 	      "abcdefghijklmnopqrstuvwxyz"
 	    + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" 
             + "1234567890"
 	    + "`~!@#$%^&*()_+[]{};:'\",<.>/?|\\";
+    
+    private final Random random;
     
     private static final boolean isAlphaLower(final int index) {
 	return (index >= 0) && (index <= 25);
@@ -33,28 +31,25 @@ public class PasswordGenerator {
 
     }
     
-    //TODO: 
-    // Refactor: 
-    //   * Move the characters and length parameters to the generate
-    //     method.  
-    //   * Modify generate to generate a single password
-    //   * Add a method named generateMultiple which should take characters
-    //     length and number parameters and return a List of String.
-    //   * Overload the default constructor to take no parameters and initialize the random number
-    //     generator.
-    //   * Add a constructor overload which should take a long to seed the random number generator with.
-    public PasswordGenerator(final PasswordChars characters, final int length, final int number) {
-	this.characters = characters;
-	this.length = length;
-	this.number = number;
+    public PasswordGenerator() {
+	random = new Random();
+    }
+    
+    public PasswordGenerator(long seed) {
+	random = new Random(seed);
     }
 
-    public List<String> generate() {
+    public List<String> generateMultiple(PasswordChars characters, int number, int length) {
 	final List<String> result = new ArrayList<String>(number);
-	final Random random = new Random();
+	
 	for (int i = 0; i < number; i++) {
-
-	    final StringBuffer password = new StringBuffer(length);
+	    result.add(generate(characters, length));
+	}
+	return result;
+    }
+    
+    public String generate(PasswordChars characters, int length) {
+	final StringBuffer password = new StringBuffer(length);
 	    
 	    while (password.length() < length) {
 
@@ -69,8 +64,7 @@ public class PasswordGenerator {
 		    password.append(lookupTable.charAt(value));
 		}
 	    }
-	    result.add(password.toString());
-	}
-	return result;
+	    return password.toString();
     }
+    
 }
