@@ -41,10 +41,6 @@ public class PasswordGenerator {
     public PasswordGenerator() {
 	random = new Random();
     }
-    
-    public PasswordGenerator(long seed) {
-	random = new Random(seed);
-    }
 
     public List<String> generateMultiple(PasswordChars characters, int number, int length) {
 	final List<String> result = new ArrayList<String>(number);
