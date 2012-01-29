@@ -5,7 +5,7 @@
 // By using this software in any fashion, you are agreeing to be bound by
 // the terms of this license.
 // You must not remove this notice, or any other, from this software.
-package org.pwgen;
+package org.jpwgen;
 
 // PasswordChars holds the type of characters available
 // to the password generator.
@@ -16,30 +16,28 @@ public class PasswordChars {
     private final boolean numeric;
     private final boolean punctuation;
 
-    public PasswordChars(final boolean alphaLower, 
-	    		      final boolean alphaUpper,
-	                      final boolean numeric, 
-	                      final boolean punctuation) {
-	
-	this.alphaLower  = alphaLower;
-	this.alphaUpper  = alphaUpper;
-	this.numeric     = numeric;
-	this.punctuation = punctuation;
+    public PasswordChars(final boolean alphaLower, final boolean alphaUpper,
+            final boolean numeric, final boolean punctuation) {
+
+        this.alphaLower = alphaLower;
+        this.alphaUpper = alphaUpper;
+        this.numeric = numeric;
+        this.punctuation = punctuation;
     }
 
     public boolean getAlphaLower() {
-	return alphaLower;
+        return alphaLower;
     }
 
     public boolean getAlphaUpper() {
-	return alphaUpper;
+        return alphaUpper;
     }
 
     public boolean getNumeric() {
-	return numeric;
+        return numeric;
     }
 
     public boolean getPunctuation() {
-	return punctuation;
+        return punctuation;
     }
 }
