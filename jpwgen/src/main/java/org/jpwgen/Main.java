@@ -8,6 +8,7 @@
 package org.jpwgen;
 
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
@@ -52,7 +53,7 @@ public class Main {
             if (hasLower || hasUpper || hasDigits || hasPunctuation) {
 
                 PasswordGenerator generator;
-                generator = new PasswordGenerator();
+                generator = new PasswordGenerator(new Random());
 
                 PasswordChars passwordChars = new PasswordChars(hasLower,
                         hasUpper, hasDigits, hasPunctuation);

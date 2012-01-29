@@ -11,7 +11,7 @@ public class PasswordCharsTest {
     
     @Test
     public void testUppercase() {
-        PasswordChars upper = new PasswordChars(false, true,false, false);
+        PasswordChars upper = new PasswordChars(false, true,false, false);  
         
         assertTrue(upper.getAlphaUpper());
     }

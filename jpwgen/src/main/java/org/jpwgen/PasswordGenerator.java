@@ -35,8 +35,8 @@ public class PasswordGenerator {
         return (index >= 62) && (index <= 94);
     }
 
-    public PasswordGenerator() {
-        random = new Random();
+    public PasswordGenerator(Random random) {
+        this.random = random;
     }
 
     public List<String> generateMultiple(PasswordChars characters, int number,
