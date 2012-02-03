@@ -67,7 +67,13 @@ public class Main {
                 // If length has been specified by the user, use it
                 // in place of the default value.
                 if (hasLength) {
-                    length = Integer.parseInt(cmd.getOptionValue('L'));
+                    try {
+                        length = Integer.parseInt(cmd.getOptionValue('L'));
+                    } catch(NumberFormatException e) {
+                        System.out.println("Error: The argument to -L must be a number");
+                        formatter.printHelp("pwgen", options);
+                        System.exit(-1);
+                    }
                 }
 
                 // If number has been specified by the user, use it
