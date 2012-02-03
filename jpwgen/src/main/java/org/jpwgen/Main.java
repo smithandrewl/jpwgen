@@ -7,6 +7,8 @@
 // You must not remove this notice, or any other, from this software.
 package org.jpwgen;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +20,7 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.commons.cli.CommandLine;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         CommandLineParser parser = new PosixParser();
         HelpFormatter formatter = new HelpFormatter();
 
@@ -53,7 +55,7 @@ public class Main {
             if (hasLower || hasUpper || hasDigits || hasPunctuation) {
 
                 PasswordGenerator generator;
-                generator = new PasswordGenerator(new Random());
+                generator = new PasswordGenerator(SecureRandom.getInstance("SHA1PRNG"));
 
                 PasswordChars passwordChars = new PasswordChars(hasLower,
                         hasUpper, hasDigits, hasPunctuation);
