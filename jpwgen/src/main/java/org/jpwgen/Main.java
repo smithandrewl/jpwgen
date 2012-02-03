@@ -70,7 +70,7 @@ public class Main {
                     try {
                         length = Integer.parseInt(cmd.getOptionValue('L'));
                     } catch(NumberFormatException e) {
-                        System.out.println("Error: The argument to -L must be a number");
+                        System.out.println("Error: The argument to length must be a number");
                         formatter.printHelp("pwgen", options);
                         System.exit(-1);
                     }
