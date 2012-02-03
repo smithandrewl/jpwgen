@@ -79,7 +79,13 @@ public class Main {
                 // If number has been specified by the user, use it
                 // in place of the default value.
                 if (hasNumber) {
-                    number = Integer.parseInt(cmd.getOptionValue('n'));
+                    try {
+                        number = Integer.parseInt(cmd.getOptionValue('n')); 
+                    } catch(NumberFormatException e) {
+                        System.out.println("Error: The argument to number must be a number");
+                        formatter.printHelp("pwgen", options);
+                        System.exit(-1);
+                    }
                 }
 
                 final List<String> passwords;
