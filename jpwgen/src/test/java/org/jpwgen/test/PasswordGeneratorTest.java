@@ -24,12 +24,22 @@ public class PasswordGeneratorTest {
     @Test
     public void testGenerateMultipleLength() {
         PasswordGenerator generator = new PasswordGenerator(new Random());
-        PasswordChars characters = new PasswordChars(true,true, true, true);
+        PasswordChars characters = new PasswordChars(true, true, true, true);
         
         List<String> result = generator.generateMultiple(characters, 10, 10);
         
         for(String password : result) {
             assertEquals(10, password.length());
         }
+    }
+    
+    @Test
+    public void testGenerateMultipleNumber() {
+        PasswordGenerator generator = new PasswordGenerator(new Random());
+        PasswordChars characters = new PasswordChars(true, true, true, true);
+        
+        List<String> result = generator.generateMultiple(characters, 10, 10);
+        
+        assertEquals(10, result.size());
     }
 }
