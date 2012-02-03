@@ -13,27 +13,12 @@ import java.util.Random;
 
 public class PasswordGenerator {
 
-    private static final String lookupTable = "abcdefghijklmnopqrstuvwxyz"
-            + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890"
-            + "`~!@#$%^&*()_+[]{};:'\",<.>/?|\\";
-
+    private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
+    private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String NUMERIC = "1234567890";
+    private static final String PUNCTUATION = "`~!@#$%^&*()_+[]{};:'\",<.>/?|\\";
+    
     private final Random random;
-
-    private static final boolean isAlphaLower(final int index) {
-        return (index >= 0) && (index <= 25);
-    }
-
-    private static final boolean isAlphaUpper(final int index) {
-        return (index >= 26) && (index <= 51);
-    }
-
-    private static final boolean isNumeric(final int index) {
-        return (index >= 52) && (index <= 61);
-    }
-
-    private static final boolean isPunctuation(final int index) {
-        return (index >= 62) && (index <= 94);
-    }
 
     public PasswordGenerator(Random random) {
         this.random = random;
@@ -50,24 +35,37 @@ public class PasswordGenerator {
     }
 
     public String generate(PasswordChars characters, int length) {
+        
+        String lookupTable="";
+        
+        if(characters.getAlphaLower()) {
+            lookupTable += LOWER;
+        }
+        
+        if(characters.getAlphaUpper()) {
+            lookupTable += UPPER;
+        }
+        
+        if(characters.getNumeric()) {
+            lookupTable += NUMERIC;
+        }
+        
+        if(characters.getPunctuation()) {
+            lookupTable += PUNCTUATION;
+        }
+        
         final StringBuffer password = new StringBuffer(length);
 
-        while (password.length() < length) {
+        for(int i = 0; i<length; i++ ) {
 
             // Generate a random value between 0 and the size of the lookup
             // table.
             final int value = random.nextInt(lookupTable.length());
 
-            // if it is a type specified in the PasswordCharacters instance,
-            // fetch the character from the lookup table and add it to the
-            // password
-            if ((isAlphaLower(value) && characters.getAlphaLower())
-                    || (isAlphaUpper(value) && characters.getAlphaUpper())
-                    || (isNumeric(value) && characters.getNumeric())
-                    || (isPunctuation(value) && characters.getPunctuation())) {
-                password.append(lookupTable.charAt(value));
-            }
+            password.append(lookupTable.charAt(value));
+            
         }
+        
         return password.toString();
     }
 
